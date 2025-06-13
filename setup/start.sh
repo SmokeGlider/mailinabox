@@ -1,6 +1,7 @@
 #!/bin/bash
 # This is the entry point for configuring the system.
 #####################################################
+logger -p local0.notice -t ${0##*/}[$$] Start.
 
 source setup/functions.sh # load our functions
 
@@ -114,7 +115,7 @@ source setup/dkim.sh
 source setup/spamassassin.sh
 source setup/web.sh
 source setup/webmail.sh
-# source setup/nextcloud.sh
+source setup/nextcloud.sh
 source setup/zpush.sh
 source setup/management.sh
 source setup/munin.sh
@@ -152,7 +153,8 @@ echo
 certbot register --register-unsafely-without-email --agree-tos --config-dir "$STORAGE_ROOT/ssl/lets_encrypt"
 fi
 
-# Done.
+logger -p local0.notice -t ${0##*/}[$$] Done.
+
 echo
 echo "-----------------------------------------------"
 echo
